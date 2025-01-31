@@ -17,7 +17,25 @@ the function below should be the only one in this file.
 void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
-// WRITE YOUR CODE HERE
+  if (in == nullptr){
+    return; // End of list if 'in' is null.
+  }
+
+  Node* nextNode = in->next;
+
+  // Check value if even or odd
+  if(in->value % 2 == 0){
+    evens = in;
+    evens->next = nullptr;
+    split(nextNode, odds, evens->next); // Recursion with evens->next
+  }
+  else{
+    odds = in;
+    odds->next = nullptr;
+    split(nextNode, odds->next, evens); // Recursion with odds->next
+  }
+
+  in = nullptr;
 }
 
 /* If you needed a helper function, write it here */
